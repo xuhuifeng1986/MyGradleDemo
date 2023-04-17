@@ -1,0 +1,66 @@
+import javax.tools.JavaCompiler
+
+apply plugin : 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'org.akhikhl.gretty'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:2.0.0'
+    }
+}
+
+if (!project.plugins.findPlugin(org.akhikhl.gretty.GrettyPlugin))
+    project.apply(plugin: org.akhikhl.gretty.GrettyPlugin)
+
+gretty {
+    httpPort = 8081
+    contextPath = '/MyGradleDemo'
+    host = 'localhost'
+    httpEnabled = true
+    servletContainer = 'tomcat8'
+    scanInterval = 1
+    fastReload =true
+    loggingLevel ="DEBUG"
+    consoleLogEnabled =true
+}
+repositories {
+    mavenCentral()
+}
+
+
+
+repositories {
+    mavenCentral()
+
+
+    group 'cn.xiong.gradle'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
+
+    dependencies {
+        testImplementation group: 'junit', name: 'junit', version: '4.12'
+        implementation group: 'org.mybatis', name: 'mybatis-spring', version: '3.0.1'
+
+    }
+    test{
+
+    }
+
+    tasks.withType(JavaCompiler){
+        options.encoding = "UTF-8"
+    }
+    [compileTestJava,compileJava,javadoc,compileTestJava]*.options*.encoding = "UTF-8"
+
+}
+
