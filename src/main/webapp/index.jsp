@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>熊少文</title>
+    <title>xiong</title>
   </head>
   <body>
   hello gretty
